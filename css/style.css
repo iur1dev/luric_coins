@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+.jogos {
+  width: 200px;
+  height: 200px;
+}
+.imagem {
+  transition: 0.5s;
+}
+.imagem:hover {
+  transform: scale(1.2);
+}
+
+.espaco {
+  margin-top: 8rem;
+}
+
+.yuri {
+  width: 300px;
+}
+
+a.menu {
+  color: rgb(48, 47, 47);
+  text-decoration: none;
+}
+
+a:hover.menu {
+  opacity: 75%;
+}
+
+a.menu2 {
+  color: snow;
+  text-decoration: none;
+}
+
+a.menu2:hover {
+  color: gold;
+}
+
+a.rodape {
+  text-decoration: none;
+  color: black;
+}
+
+a.rodape:hover {
+  opacity: 75%;
+}
+
+.tamanho_logo {
+  width: 300px;
+}
+
+.icone_login {
+  background-color: rgb(236, 236, 236);
+  width: 100px;
+  height: 60px;
+  margin-top: 5rem;
+  font-size: small;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+#top_btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  font-size: 22px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: none;
+  border-radius: 10px;
+}
+
+.nav_fixa {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  color: snow;
+}
