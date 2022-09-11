@@ -2,9 +2,9 @@
 $servidor = "localhost";
 $usuario = "root";
 $senha = "";
-$bdd = "luric_coins";
-$conn = new mysqli($servidor, $usuario, $senha, $bdd);
+$bd = "luric_coins";
+$conn = new mysqli($servidor, $usuario, $senha, $bd);
 
 if ($conn->error) {
-    die("404 bdd: " . $conn->error);
+    die("404 sql: " . $conn->error);
 }

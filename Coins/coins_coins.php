@@ -1,5 +1,5 @@
 <?php
-include_once("conn.php");
+include_once("../conn.php");
 
 $sql_code = "SELECT * FROM estoque_coins;";
 $sql_query = $conn->query($sql_code) or die("404 mysql: " . $conn->error);
@@ -19,8 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_insert = "INSERT INTO compras(personagem, quantidade)
         VALUE ('$personagem', '$qnt')";
         $query2 = $conn->query($sql_insert) or die("404 mysql: " . $conn->error);
-
-       
     }
 }
 
@@ -31,21 +29,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="../img/coin.png" type="image/x-icon">
+    <title>Luric Coins</title>
+    <meta name="author" content="Luric">
+    <meta name="description" content="site de vendas tibiana">
+    <meta name="keywords" content="tibia, coins">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
-    <title>Jogo - Tibia</title>
-    <meta name="author" content="yuR1dev">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
+
+<style>
+    .hover_opacity:hover {
+        opacity: 50%;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: black;
+    }
+</style>
 
 <body>
 
-    <?php include_once("nav.php"); ?>
+    <?php include_once("nav_coins.php"); ?>
 
     <main>
         <div class="container">
@@ -53,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-2">
                 </div>
                 <div class="col-4">
-                    <img src="img/tibia.png" class="tamanho_imagem border border-danger border-5 rounded img-fluid" alt="logo tibia">
+                    <img src="../img/tibia.png" class="tamanho_imagem border border-danger border-5 rounded img-fluid" alt="logo tibia">
                 </div>
                 <div class="col-4">
                     <h5 class="fw-bold">Tibia Coins</h5>
@@ -68,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             }
                         }
                     } ?>
-                    <form action="" method="POST">
+                    <form method="POST">
                         <h5 class="fw-bold">R$<span id="valor" name="valor" class="fw-bold">0,00</span></h5>
                         <label for="nome" class="form-label">Nome do Personagem</label>
                         <input type="text" class="form-control" id="nome" name="nome">
@@ -85,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </main>
 
-    <?php include_once("footer.php"); ?>
+    <?php include_once("footer_coins.php"); ?>
 
     <!-- Modal -->
     <div class="modal fade" id="final_compra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,10 +131,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </body>
 
-<script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.mask.js"></script>
-<script src="js/mask.js"></script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/jquery.mask.js"></script>
+<script src="../js/mask.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -132,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             let final = qnt * coin
             $('#valor').html(final.toFixed(2).replace(".", ","))
         });
-        //
+
         $('#comprar').click(function() {
             let nome = $('#nome').val();
             let qnt = $('#qnt').val();

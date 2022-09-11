@@ -4,4 +4,4 @@ if (!isset($_SESSION)) {
 }
 
 session_destroy();
-header('Location: index_venda.php');
+header('Location: index_coins.php');

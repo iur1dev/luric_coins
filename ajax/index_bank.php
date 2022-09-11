@@ -7,7 +7,7 @@ $nome = $_POST['nome'];
 $valor = $_POST['valor'];
 $qnt = $_POST['qnt'];
 
-$sql = "INSERT INTO usuarios_pag(chave, nome, valor, qnt)
+$sql = "INSERT INTO coins_bank(chave, nome, valor, qnt)
         VALUE ('$pix', '$nome', '$valor', '$qnt')";
 
 if (mysqli_query($conn, $sql)) {

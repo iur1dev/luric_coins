@@ -1,8 +1,6 @@
 <?php
-include_once("conn.php");
-
+include_once("../conn.php");
 session_start();
-
 ?>
 <!-- ( ͡° ͜ʖ ͡°) -->
 <!DOCTYPE html>
@@ -10,14 +8,14 @@ session_start();
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/bnk.png" type="image/x-icon">
     <title>Luric Bank</title>
     <meta name="author" content="Luric">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="site de compras tibiano">
+    <meta name="keywords" content="tibia, coins">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -28,7 +26,7 @@ session_start();
                 <div class="col-4">
                 </div>
                 <div class="col-4 text-center">
-                    <a href="index_venda.php"><img src="img/logo.png" style="width: 500px;" class="img-fluid yuri" alt="logo yuri coins"></a>
+                    <a href="index_bank.php"><img src="../img/logo.png" style="width: 500px;" class="img-fluid yuri" alt="logo yuri coins"></a>
                 </div>
                 <div class="col-1 margin_top">
                     <?php if (!isset($_SESSION['nome'])) { ?>
@@ -39,14 +37,14 @@ session_start();
                 </div>
                 <div class="col-1 margin_top">
                     <?php if (!isset($_SESSION['nome'])) { ?>
-                        <a href="register_bank.php" class="menu">
+                        <a href="usuarios_bank.php" class="menu">
                             <div class="icone_login rounded"><i class="fa-solid fa-circle-check fs-3"></i><br>Registra-se</div>
                         </a>
                     <?php } ?>
                 </div>
                 <div class="col-1 margin_top">
                     <?php if (isset($_SESSION['nome'])) { ?>
-                        <a href="logout.php" class="menu">
+                        <a href="logout_bank.php" class="menu">
                             <div class="icone_login rounded"><i class="fa-solid fa-circle-xmark fs-3"></i><br>Sair</div>
                         </a>
                     <?php  } ?>
@@ -82,12 +80,12 @@ session_start();
         </div>
 
         <div class="container text-center">
-            <img src="img/yuri_bank.png" class="rounded mt-4" alt="tutorial yuri bank">
+            <img src="../img/yuri_bank.png" class="rounded mt-4" alt="tutorial yuri bank">
             <br>
             <span class="badge bg-secondary mt-5 p-3 fs-4">OFERTAS</span>
 
             <div class="card" style="width: 18rem;">
-                <img src="img/tibia.png" class="card-img-top" alt="compra de tibia coins">
+                <img src="../img/tibia.png" class="card-img-top" alt="compra de tibia coins">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">Vender Tibia Coins</h5>
 
@@ -121,8 +119,8 @@ session_start();
                     </div>
                     <div class="col-3">
                         <h5 class="fw-bold">SITE SEGURO</h5>
-                        <img src="img/google.jpg" alt="seguranca google">
-                        <img src="img/norton.jpg" alt="seguranca norton">
+                        <img src="../img/google.jpg" alt="seguranca google">
+                        <img src="../img/norton.jpg" alt="seguranca norton">
                     </div>
                 </div>
             </div>
@@ -130,6 +128,7 @@ session_start();
         <p class="text-center my-4">Copyright © <?php echo date('Y'); ?> <strong>Luric Bank</strong> - Todos os direitos reservados.</p>
 
         <button id="top_btn"><i class="fa-solid fa-circle-arrow-up"></i></button>
+        <a href="../coins/index_coins.php" class="text-muted fixed-bottom ms-2 fw-bold text-decoration-none">By Luric</a>
     </footer>
 
     <!-- Modal -->
@@ -159,20 +158,16 @@ session_start();
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary fw-bold" id="final">Vender</button>
+                    <button class="btn btn-primary fw-bold" name="final" id="final">Vender</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.mask.js"></script>
-    <script src="js/mask.js"></script>
-    <script src="js/index_venda.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/additional-methods.min.js"></script>
-    <script src="js/messages_pt_BR.js"></script>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../js/mask.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -194,20 +189,20 @@ session_start();
             })
             //
             $('#final').click(function() {
+
                 let pix = $('#pix').val();
                 let nome = $('#nome').val();
                 let valor = $('#r_valor').text();
                 let qnt = $('#r_qnt').text();
 
                 $.ajax({
-                    url: "ajax/insert_index.php",
+                    url: "../ajax/index_bank.php",
                     type: "POST",
                     data: {
                         pix: pix,
                         nome: nome,
                         valor: valor,
                         qnt: qnt
-
                     },
                     dataType: "json",
                     success: function(dados, status) {
@@ -220,11 +215,6 @@ session_start();
                     },
                 });
             })
-            $('#top_btn').click(function() {
-                $(window).scrollTop(0);
-            })
-
-
         })
     </script>
 
