@@ -1,21 +1,14 @@
 <?php
-include('../conn.php');
+include_once('../conn.php');
 header('Content-Type: application/json');
 
+$pix = $_POST['pix'];
 $nome = $_POST['nome'];
-$cpf = $_POST['cpf'];
-$nasc = $_POST['nasc'];
-$cep = $_POST['cep'];
-$estado = $_POST['estado'];
-$cidade = $_POST['cidade'];
-$bairro = $_POST['bairro'];
-$rua = $_POST['rua'];
-$numero = $_POST['numero'];
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+$valor = $_POST['valor'];
+$qnt = $_POST['qnt'];
 
-$sql = "INSERT INTO USUARIO(nome, cpf, nasc, cep, estado, cidade, bairro, rua, numero, email, senha)
-        VALUE ('$nome', '$cpf', '$nasc', '$cep', '$estado', '$cidade','$bairro','$rua', '$numero', '$email', '$senha')";
+$sql = "INSERT INTO usuarios_pag(chave, nome, valor, qnt)
+        VALUE ('$pix', '$nome', '$valor', '$qnt')";
 
 if (mysqli_query($conn, $sql)) {
     echo json_encode('');

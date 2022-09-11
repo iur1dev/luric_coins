@@ -2,7 +2,6 @@
 include_once("conn.php");
 
 session_start();
-session_unset();
 
 ?>
 
@@ -13,8 +12,8 @@ session_unset();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
-    <title>yuR1 Bank</title>
-    <meta name="author" content="yuR1dev">
+    <title>Luric Bank</title>
+    <meta name="author" content="Luric">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -29,22 +28,30 @@ session_unset();
                 <div class="col-4">
                 </div>
                 <div class="col-4 text-center">
-                    <a href="index_venda.php"><img src="img/logo.png" class="tamanho_logo" alt="logo yuri bank"></a>
+                    <a href="index_venda.php"><img src="img/logo.png" style="width: 500px;" class="img-fluid yuri" alt="logo yuri coins"></a>
                 </div>
-                <div class="col-1">
-                    <a href="" class="menu" data-bs-toggle="modal" data-bs-target="#cadastro">
-                        <div class="icone_login rounded"><i class="fa-solid fa-user fs-3"></i><br>Entrar</div>
-                    </a>
+                <div class="col-1 margin_top">
+                    <?php if (!isset($_SESSION['nome'])) { ?>
+                        <a href="logar_bank.php" class="menu">
+                            <div class="icone_login rounded"><i class="fa-solid fa-user fs-3"></i><br>Entrar</div>
+                        </a>
+                    <?php } ?>
                 </div>
-                <div class="col-1">
-                    <a href="" class="menu" data-bs-toggle="modal" data-bs-target="#registro">
-                        <div class="icone_login rounded"><i class="fa-solid fa-circle-check fs-3"></i><br>Registra-se</div>
-                    </a>
+                <div class="col-1 margin_top">
+                    <?php if (!isset($_SESSION['nome'])) { ?>
+                        <a href="register_bank.php" class="menu">
+                            <div class="icone_login rounded"><i class="fa-solid fa-circle-check fs-3"></i><br>Registra-se</div>
+                        </a>
+                    <?php } ?>
                 </div>
-                <div class="col-1">
-                    <p style="margin-top: 6rem;">0 - R$ 0,00</p>
+                <div class="col-1 margin_top">
+                    <?php if (isset($_SESSION['nome'])) { ?>
+                        <a href="logout.php" class="menu">
+                            <div class="icone_login rounded"><i class="fa-solid fa-circle-xmark fs-3"></i><br>Sair</div>
+                        </a>
+                    <?php  } ?>
                 </div>
-                <div class="col-1">
+                <div class="col-1 margin_top">
                     <i class="fa-solid fa-cart-shopping fs-3 rounded bg-secondary p-3 text-light" style="margin-top: 5rem;"></i>
                 </div>
             </div>
@@ -79,13 +86,14 @@ session_unset();
             <br>
             <span class="badge bg-secondary mt-5 p-3 fs-4">OFERTAS</span>
 
-            <div class="card imagem" style="width: 18rem;">
+            <div class="card" style="width: 18rem;">
                 <img src="img/tibia.png" class="card-img-top" alt="compra de tibia coins">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">Vender Tibia Coins</h5>
-                    <p class="card-text">R$ 0,01</p>
-                    <input type="number" class="form-control">
-                    <a href="#" class="btn btn-secondary mt-3">VENDER</a>
+
+                    <p class="card-text" name="valor" id="valor">0,00</p>
+                    <input type="number" name="qnt" id="qnt" class="form-control">
+                    <button class="btn btn-secondary mt-3" name="abrir_m" id="abrir_m">VENDER</button>
                 </div>
             </div>
         </div>
@@ -119,141 +127,107 @@ session_unset();
                 </div>
             </div>
         </div>
-        <p class="text-center my-4">Copyright © <?php echo date('Y'); ?> <strong>yuR1 Bank</strong> - Todos os direitos reservados.</p>
+        <p class="text-center my-4">Copyright © <?php echo date('Y'); ?> <strong>Luric Bank</strong> - Todos os direitos reservados.</p>
 
         <button id="top_btn"><i class="fa-solid fa-circle-arrow-up"></i></button>
     </footer>
 
     <!-- Modal -->
-    <div class="modal fade" id="registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Opções disponíveis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
-                    <form class="row g-3 needs-validation" novalidate>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-8">
-                                    <h5 class="fw-bold">Seus dados de contato</h5>
-                                </div>
-                                <div class="text-end col-4">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                            </div>
-                            <label for="nome" class="form-label mt-3">Nome<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="nome" value="Nome" required>
-                            <div class="invalid-feedback">
-                                Looks good!
-                            </div>
+                    <div class="mb-3">
+                        <label for="pix" class="form-label">Pix CPF ou CNPJ (Proibido outras chaves)</label>
+                        <input type="text" class="form-control cpf" placeholder="Pix CPF ou CNPJ (Proibido outras chaves)" id="pix" name="pix" aria-describedby="emailHelp">
+                    </div>
 
-                            <label for="sobrenome" class="form-label mt-3">Sobrenome<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="sobrenome" value="Sobrenome" required>
-                            <div class="invalid-feedback">
-                                Looks good!
-                            </div>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome Completo do Titular do PIX</label>
+                        <input type="text" class="form-control" placeholder="Nome Completo do Titular do PIX" id="nome" name="nome" aria-describedby="emailHelp">
+                    </div>
 
-                            <label for="email" class="form-label mt-3">E-mail<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="email" value="E-mail" required>
-                            <div class="invalid-feedback">
-                                Looks good!
-                            </div>
+                    <div class="alert alert-primary text-center" role="alert">
+                        Quantidade mínima para venda: 250
+                    </div>
+                    <div id="r_valor" class="alert alert-primary text-center" role="alert"></div>
+                    <div id="r_qnt" class="alert alert-primary text-center" role="alert"></div>
 
-                            <label for="celular" class="form-label mt-3">Celular<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="celular" value="Celular" required>
-                            <div class="invalid-feedback">
-                                Looks good!
-                            </div>
-
-                            <h5 class="fw-bold mt-4">Sua senha de acesso</h5>
-
-                            <label for="senha" class="form-label mt-3">Senha<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="senha" value="Senha" required>
-                            <div class="invalid-feedback">
-                                Looks good!
-                            </div>
-
-                            <label for="senha" class="form-label mt-3">Repetir a senha<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="senha" value="Repetir a senha" required>
-                            <div class="invalid-feedback">
-                                Looks good!
-                            </div>
-
-                            <h5 class="fw-bold mt-3">Novidades, ofertas e promoções por e-mail</h5>
-
-                            <small>Deseja receber?</small>
-                            <br>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Sim</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Não</label>
-                            </div>
-
-                            <button class="btn btn-secondary col-12 mt-4" id="enviar">Enviar</button>
-                        </div>
-                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary fw-bold" id="final">Vender</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="cadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <h5 class="fw-bold col-6">Já é cliente?</h5>
-                        <div class="text-end col-6">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                    </div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/mask.js"></script>
+    <script src="js/index_venda.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.min.js"></script>
+    <script src="js/messages_pt_BR.js"></script>
 
-                    <label for="email_login" class="form-label mt-3">E-mail</label>
-                    <input type="text" class="form-control" id="email_login" value="E-mail" required>
-                    <div class="invalid-feedback">
-                        Looks good!
-                    </div>
+    <script>
+        $(document).ready(function() {
+            let coin = 0.13;
+            $('#qnt').blur(function() {
+                let qnt = $('#qnt').val();
+                let final = qnt * coin
+                $('#valor').html(final.toFixed(2).replace(".", ","))
+            });
+            //
+            $('#abrir_m').click(function() {
+                $('#exampleModal').modal('show');
+                let valor = $('#valor').text();
+                let qnt = $('#qnt').val();
 
-                    <label for="senha_login" class="form-label mt-3">Senha</label>
-                    <input type="text" class="form-control" id="senha_login" value="Senha" required>
-                    <div class="invalid-feedback">
-                        Looks good!
-                    </div>
+                $('#r_valor').text(valor);
+                $('#r_qnt').html(qnt + ' Coins');
 
-                    <small style="text-decoration: underline;">Solicitar nova senha</small>
+            })
+            //
+            $('#final').click(function() {
+                let pix = $('#pix').val();
+                let nome = $('#nome').val();
+                let valor = $('#r_valor').text();
+                let qnt = $('#r_qnt').text();
 
-                    <button class="btn btn-secondary col-12 mt-4" id="entrar">Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                $.ajax({
+                    url: "ajax/insert_index.php",
+                    type: "POST",
+                    data: {
+                        pix: pix,
+                        nome: nome,
+                        valor: valor,
+                        qnt: qnt
+
+                    },
+                    dataType: "json",
+                    success: function(dados, status) {
+                        alert(status);
+                        alert(dados);
+                    },
+                    error: function(dados, status) {
+                        alert(status);
+                        alert(dados);
+                    },
+                });
+            })
+            $('#top_btn').click(function() {
+                $(window).scrollTop(0);
+            })
+
+
+        })
+    </script>
 
 </body>
-
-<script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.mask.js"></script>
-<script src="js/mask.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 40) {
-                $('#top_btn').fadeIn();
-            } else {
-                $('#top_btn').fadeOut();
-            }
-        })
-
-        $('#top_btn').click(function() {
-            $('html, body').animate({
-                scrollTop: 0
-            }, 100);
-        });
-    });
-</script>
 
 </html>
