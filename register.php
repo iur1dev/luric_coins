@@ -116,6 +116,7 @@ function limpaPost($valor)
 }
 
 ?>
+<!-- ( ͡° ͜ʖ ͡°) -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 

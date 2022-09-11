@@ -34,6 +34,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     }
 }
 ?>
+<!-- ( ͡° ͜ʖ ͡°) -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -45,41 +46,41 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     <meta name="author" content="Luric">
     <meta name="description" content="site de vendas tibiana">
     <meta name="keywords" content="tibia,coins">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="css/style.css">
 </head>
 <style>
     body {
-        background-image: url("img/fundo.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+  background-image: url("img/fundo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
 
 <body>
     <div class="container">
         <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4 mx-auto">
-            <form action="" method="POST" class="bg-light rounded p-3" style="margin-top: 50%;">
-                <div class="mb-3">
-                    <label for="email" class="form-label fw-bold"><i class="fa-solid fa-user"></i> E-mail</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" <?php if (isset($email)) {
-                                                                                                                echo "value='" . $_POST['email'] . "'";
-                                                                                                            } ?>>
-                </div>
-                <div class="mb-3">
-                    <label for="senha" class="form-label fw-bold"><i class="fa-solid fa-lock"></i> Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
-                </div>
-                <small><?php if (isset($erro)) {
-                            echo $erro;
-                        }; ?></small>
-                <button type="submit" class="btn btn-primary col-12 fw-bold">Entrar</button>
-            </form>
-        </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4 mx-auto">
+                <form action="" method="POST" class="bg-light rounded p-3" style="margin-top: 50%;">
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold"><i class="fa-solid fa-user"></i> E-mail</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" <?php if (isset($email)) {
+                                                                                                                    echo "value='" . $_POST['email'] . "'";
+                                                                                                                } ?>>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label fw-bold"><i class="fa-solid fa-lock"></i> Senha</label>
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                    </div>
+                    <small><?php if (isset($erro)) {
+                                echo $erro;
+                            }; ?></small>
+                    <button type="submit" class="btn btn-primary col-12 fw-bold">Entrar</button>
+                </form>
+            </div>
         </div>
     </div>
 

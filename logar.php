@@ -34,6 +34,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     }
 }
 ?>
+<!-- ( ͡° ͜ʖ ͡°) -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 
